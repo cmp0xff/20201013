@@ -1,0 +1,637 @@
+%% UzK - A BEAMER THEME FOR THE UNIVERSITY OF COLOGNE
+%% http://solstice.github.com/uzk-theme/
+
+\documentclass[mathserif]{beamer}
+
+\usepackage[english]{babel}
+%\usepackage{inputenc}
+\usepackage{fontenc}
+
+%% Falls Anzeige der \sections, \subsections etc. gewuenscht, kann zB.
+%% das infolines theme geladen werden. Wichtig ist jedoch, dass andere
+%% Themes _vor_ dem UzK-Theme geladen werden.
+%\useoutertheme{infolines}
+
+%% Falls keine der Optionen zur Bestimmung der Fusszeile uebergeben werden    %%
+%% werden alle Fakultaetsfarben verwendet. ---------------------------------- %%
+\usetheme[%
+%wiso,        %% Wiso-Fakultaet
+%jura,        %% Rechtswissenschaftliche Fakultaet
+%medizin,     %% Medizinische Fakultaet
+%philo,       %% Philosophische Fakultaet
+matnat,      %% Mathematisch-Naturwissenschaftliche Fakultaet
+%human,       %% Humanwissenschaftliche Fakultaet
+%verw,        %% Universitaetsverwaltung
+%nav,         %% Schaltet die Navigationssymbole ein
+%latexfonts,  %% Verwendet die latex-beamer-Standardschrift
+colorful,    %% Farbige Balken im infolines-Theme
+squares,     %% Aufzaehlungspunkte rechteckig
+%nologo,      %% Kein Logo im Seitenhintergrund
+]{UzK}
+
+\usepackage{mathtools}
+\usepackage{upgreek} %upright Greek letters 
+
+\usepackage[style=phys,
+    articletitle=false]{biblatex}
+\addbibresource{references.bib}
+
+%%%% Math Commands with Parameters %%%%
+
+% Bracket-like
+\newcommand{\rbr}[1]{{\left(#1\right)}}
+\newcommand{\sbr}[1]{{\left[#1\right]}}
+\newcommand{\cbr}[1]{{\left\{#1\right\}}}
+\newcommand{\abr}[1]{{\left<#1\right>}}
+\newcommand{\vbr}[1]{{\left|#1\right|}}
+%\newcommand{\abs}[1]{\vbr{#1}}
+\newcommand{\dvbr}[1]{{\left\|#1\right\|}}
+\newcommand{\fat}[2]{{\left.#1\right|_{#2}}}
+%\newcommand*\abs[1]{\left|#1\right|}% \abs{}, absolute value bracket
+
+% Functions; note the space between the name and the bracket!
+\newcommand{\rfun}[2]{#1\mathopen{}\left(#2\right)\mathclose{}}
+\newcommand{\sfun}[2]{#1\mathopen{}\left[#2\right]\mathclose{}}
+\newcommand{\cfun}[2]{#1\mathopen{}\left\{#2\right\}\mathclose{}}
+\newcommand{\afun}[2]{#1\mathopen{}\left<#2\right>\mathclose{}}
+\newcommand{\vfun}[2]{#1\mathopen{}\left|#2\right|\mathclose{}}
+% Fraction-like
+\newcommand{\frde}[2]{{\frac{\dif{#1}}{\dif{#2}}}}
+\newcommand{\frDe}[2]{{\frac{\Dif{#1}}{\Dif{#2}}}}
+\newcommand{\frpa}[2]{{\frac{\partial{#1}}{\partial{#2}}}}
+\newcommand{\frdva}[2]{{\frac{\dva{#1}}{\dva{#2}}}}
+
+\newcommand{\dif}{\mathrm{d}}
+
+\newcommand\mi{\mathrm{i}} % imaginary unit i
+\newcommand\me{\mathrm{e}} % natural number e
+\newcommand\pp{\uppi}      % Archimedes' constant
+\newcommand{\Rho}{P}
+\newcommand{\Alpha}{A}
+
+\title{Narrow Gaussian wave-packets of \\ WKB mode functions}
+
+\author[Yi-Fan Wang \and Chen Lan]%
+{Yi-Fan Wang\inst{1} {\tiny\href{mailto:yfwang@thp.uni-koeln.de}{\texttt{yfwang@thp.uni-koeln.de}}} %
+  \and%
+  Chen Lan\inst{2} {\tiny\href{mailto:lanchen@nankai.edu.cn}{\texttt{lanchen@nankai.edu.cn}}}
+ }
+
+\institute[UoC \and Nankai]{
+\inst{1} Institute of Theoretical Physics, University of Cologne, \\
+Z\"ulpicher Str.\ 77a, 50937 Cologne, Germany
+\and
+\inst{2} School of Physics, Nankai University, \\
+Weijin Road 94, 300071 Nankai Tianjin, China
+}
+
+\date{Group seminar, October 13, 2020}
+
+\begin{document}
+
+\begin{frame}%[titlepage]
+  \titlepage
+\end{frame}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{Introduction}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+
+\begin{frame}{Introduction}
+    \begin{itemize}
+        \item To be presented is a relatively self-contained part in the 
+        \underline{ridge-line project}
+        \item Constructed from WKB mode functions, narrow Gaussian wave-packets 
+        indeed \alert{necessarily} `follow', or `peak around', the classical 
+        trajectory
+        \item Implications for singularity avoidance, etc.\ are to be discussed
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Outline}
+    \begin{enumerate}
+        \setcounter{enumi}{-1}
+        \item Introduce wave-packets in quantum cosmology
+        \item Introduce a stationary equation to incorporate the following:
+        \begin{itemize}
+            \item quantum-mechanical systems with degenerate energy 
+            eigenstates, and
+            \item the Wheeler--DeWitt equation in quantum cosmology
+        \end{itemize}
+        \item Introduce WKB mode functions and show that their phases are 
+        necessarily \emph{complete integrals} of the Hamilton--Jacobi equation
+        \item Construct narrow Gaussian wave-packets explicitly for the WKB mode 
+        functions and show that they \alert{peak around the classical trajectory}
+    \end{enumerate}
+\end{frame}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{Why wave-packets?}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+
+\begin{frame}{(0/4) Why wave-packets?}{A question}
+    \begin{itemize}
+        \item In the quantum theory of a closed system, a state of the system
+            is pure and described by a wave function
+        \item In the Wheeler--DeWitt approach, aka quantum geometrodynamics, the
+            universe is a closed system, and therefore described by a wave
+            function
+        \item Freezing the functional, inhomogeneous degrees
+            of freedom makes the starting point of the WDW quantum cosmology
+    \end{itemize}
+
+    \begin{itemize}
+        \item What are the qualities of a quantum-cosmological wave function 
+            that makes the universe `look classical'?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{(0/4) Why wave-packets?}{The question}
+    \begin{itemize}
+        \item
+        In quantum mechanics, colloquially, classical-looking particles
+        are described by wave-packets that peaks around \underline{a point} in 
+        the configuration space
+        \item
+        In quantum cosmology, it has been proposed that a classical-looking 
+        universe are also described by a \alert{peaked} wave-packet
+        \item
+        The timeless feature of the WDW approach gives stationary equations,
+        which in turn make the wave-packets stationary that \alert{stretches}
+    \end{itemize}
+
+    \begin{itemize}
+        \item
+        Do they stretch along a classical trajectory, so that they `resembles'
+        their classical counterparts?
+    \end{itemize}
+\end{frame}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{WKB mode function}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+
+\begin{frame}{(1.0/4) Stationary wave function}
+\begin{itemize}
+\item
+Introduce
+\begin{align}
+ \rfun{H_\perp}{q^i, \frac{\hslash}{\mi}\partial_i} \psi = 0\,,\qquad
+ i = 1, 2, \ldots, n
+ \label{eq:sta-eq-10}
+\end{align}
+to incorporate the following two scenarios:
+\begin{itemize}
+    \item Quantum mechanics: stationary Schr\"odinger equation, $H_\perp \coloneqq H - E$, $H$ canonical Hamiltonian, $E$ energy level
+    \item Wheeler--DeWitt quantum geometrodynamics: equation of Hamiltonian constraint
+\end{itemize}
+\item
+The solutions to eq.\ \eqref{eq:sta-eq-10} are collectively called \alert{stationary wave functions}
+\item
+Ambiguity of operator ordering will not be address here
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(1.1/4) Stationary WKB wave function}
+\begin{itemize}
+\item Use the approximation scheme named after
+(Jeffreys,) Wentzel, Kramers and Brillouin
+    \begin{align}
+    \psi \approx \sqrt{\rfun{D}{q^i}}\,
+    \rfun{\exp}{\frac{\mi}{\hslash} \rfun{S}{q^i}}\,,
+    \qquad
+    i = 1, \ldots, n\,.
+\end{align}
+    \item $D$ van Vleck factor
+    \item $S$ can be shown to satisfy the reduced Hamilton--Jacobi equation
+\begin{align}
+    \rfun{H_\perp}{q^i, \partial_i S} = 0\,.
+    \label{eq:packet-100}
+\end{align}
+    \item
+    In order to construct a sensible wave-packet, \alert{good quantum numbers} are to be distinguished
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(1.2/4) WKB mode function}{Introduction}
+\begin{itemize}
+    \item In the Hamilton--Jacobi approach, physically relevant is the \alert{complete integral} of eq.\ \eqref{eq:packet-100}
+\begin{align}
+    S = \rfun{S}{q^i; \alpha_1, \ldots, \alpha_{n-1}} + \alpha_n\,,
+    \label{eq:packet-150}
+\end{align}
+    in contrast to the \emph{general integral} \footfullcite[sec.\ 3.1]{Evans2010}.
+    
+    \item
+    In the full quantum geometrodynamics, it has been shown that $S$ is a complete integral, iff the Hamilton equations for the canonical momenta are to be derived \footfullcite{Gerlach1969}
+    
+    \item
+    What about a generic system?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(1.2/4) WKB mode function}{Proposition}
+\begin{alertblock}{Proposition of the WKB mode functions}
+    The stationary WKB wave function $\sqrt{\rfun{D}{q^i}}\,
+    \rfun{\exp}{\frac{\mi}{\hslash} \rfun{S}{q^i}}$ can be chosen such that it contains good quantum numbers in $S$ in the form
+    \begin{align}
+    S = \rfun{S}{q^i; \alpha_1, \ldots, \alpha_{m}}\,, \qquad m \le n-1\,.
+\end{align}
+\end{alertblock}
+\begin{itemize}
+    \item Such a stationary WKB wave function is called a \alert{WKB mode function}
+    \item The $\cbr{\alpha_i}$'s in the complete integral always exist locally, \emph{regardless} of the involution relations
+    \item The involution relations are \emph{needed} for us (see below)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(1.2/4) WKB mode function}{Outline of the proof}
+\begin{enumerate}
+    \item HJ equation can be solved if it can be iteratively separated (e.g.\ $\rfun{\phi_2}{q^2, \tfrac{\dif S_2}{\dif q^2}; \alpha_1} \eqqcolon \alpha_2$)
+    \item $\cbr{\phi_j}$'s are constants of motions, hence $\sbr{\phi_j, H_\perp}_{\text{P}} = 0$ (in involution); we also require that $\sbr{\phi_i, \phi_j}_\text{P} = 0$
+    %the $\cbr{\phi_j}$'s are also in mutual involution
+    \item Upon canonical quantisation,
+    \begin{itemize}
+        \item $H_\perp$ and $\cbr{\phi_j}$ are promoted to operators
+        \item Involution relations $\Rightarrow$ commutation relations $\rbr{\mi\hslash}^{-1}\sbr{\cdot,\cdot}_{-}$
+        \item $\rfun{\phi_2}{q^2, \tfrac{\hslash}{\mi}\partial_2; \alpha_1} \psi = \alpha_2 \psi$
+        \item $\psi = \psi_{\alpha_1 \ldots \alpha_m}$
+    \end{itemize}
+    \item Making WKB ansaetze for each of the eigenvalue equations gives the phase we want
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{(1.2/4) WKB mode function}{1.\ Iterative separation of variables}
+\begin{itemize}
+    \item Let $m \le n-1$ variables be such that they can be iteratively separated \footfullcite[sec.\ 48]{landau1}, so that along a classical trajectory
+\begin{align}
+\begin{split}
+    \rfun{\phi_1}{q^1, \tfrac{\dif S_1}{\dif q^1}} \eqqcolon \alpha_1\,,
+    \qquad
+    \rfun{\phi_2}{q^2, \tfrac{\dif S_2}{\dif q^2}; \alpha_1} &\eqqcolon \alpha_2\,,
+    \ldots\,,\\
+    \rfun{\phi_m}{q^m, \tfrac{\dif S_n}{\dif q^m}; \alpha_1,\ldots, \alpha_{m-1}} &\eqqcolon \alpha_m\,,
+\end{split}
+\label{eq:packet-200}
+\end{align}
+\item The corresponding complete integral, eq.\ \eqref{eq:packet-150}, reads
+\begin{align}
+\begin{split}
+    &\quad\,\rfun{S}{q^i; \alpha_1, \ldots \alpha_m} = \rfun{S_1}{q^1; \alpha_1} + \rfun{S_2}{q^2; \alpha_1, \alpha_2} +
+    \ldots
+    \\
+    &+ \rfun{S_m}{q^m; \alpha_1, \ldots, \alpha_m}
+    +
+    \rfun{S_{m+1}}{q^{m+1}\ldots q^n}\,. %; \alpha_1, \ldots, \alpha_m}\,.
+    \label{eq:packet-250}
+\end{split}
+\end{align}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(1.2/4) WKB mode function}{2.\ Involution property and ansatz}
+\begin{itemize}
+    \item From the HJ theory we know that $\cbr{\rfun{\phi_j}{q^j, p_j}}$'s are \emph{in involution} with $H_\perp$, i.e.\ the Poisson bracket
+\begin{align}
+    \sbr{\rfun{\phi_j}{q^j, p_j}, \rfun{H_\perp}{q^i, p_i}}_\text{P} = 0\,,
+    \qquad \forall j = 1, \ldots, m\,.
+\end{align}
+\item
+We also require that $\cbr{\rfun{\phi_j}{q^j, p_j}}$'s are in mutual involution
+\end{itemize}
+
+\begin{itemize}
+    \item Side remark: if there are $m=n$ independent first integrals that are in involution, then (Liouville--Arnold theorem) \footfullcite[sec.\ 10.1]{Arnold1989}
+    \begin{itemize}
+        \item $\exists$ a canonical transformation to action-angle coordinates
+        \item the EoM can be solved ``in quadratures'', or as integrals
+        \item the system is Liouville integrable
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(1.2/4) WKB mode function}{3.\ Canonical quantisation}
+Upon canonical quantisation,
+\begin{itemize}
+    \item $H_\perp$ and $\cbr{\phi_j}$ are promoted to operators
+    \item Involution relations $\Rightarrow$ commutation relations
+    \begin{align}
+        \sbr{\cdot,\cdot}_{\text{P}}
+        \qquad\Rightarrow\qquad
+        \tfrac{1}{\mi \hslash}\sbr{\cdot,\cdot}_{-}
+    \end{align}
+    \item
+    Equations \eqref{eq:packet-200} $\Rightarrow$ simultaneous eigenvalue equations
+    \begin{align}
+\begin{split}
+    \rfun{\phi_1}{q^1, \tfrac{\hslash}{\mi}\partial_1} \psi = \alpha_1 \psi\,,
+    \quad
+    \rfun{\phi_2}{q^2, \tfrac{\hslash}{\mi}\partial_2; \alpha_1} \psi &= \alpha_2 \psi\,, \\
+    \ldots\,,\quad
+    \rfun{\phi_n}{q^n, \tfrac{\hslash}{\mi}\partial_m; \alpha_1,\ldots, \alpha_{m-1}}\psi &= \alpha_m \psi\,,;
+\end{split}
+    \label{eq:packet-300}
+    \end{align}
+    since $\cbr{\phi_j}$'s also commute with $H_\perp$, $\cbr{\alpha_j}$'s are good quantum numbers
+    
+    \item
+    $\psi = \psi_{\alpha_1 \ldots \alpha_m}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(1.2/4) WKB mode function}{4.\ WKB ansaetze}
+\begin{itemize}
+    \item Let $\psi \approx \rfun{\exp}{\frac{\mi}{\hslash} \rbr{\rfun{S_1}{q^1} + \rfun{\widetilde{S}_1}{q^2 \ldots q^n}}}$
+
+    \item Inserting into $\phi_1 \psi = \alpha_1 \psi$ gives $\rfun{\phi_1}{q^1, \frde{S_1}{q^1}} = \alpha_1$ at the leading order
+
+    \item Partial inverting and integrating gives $S_1 = \rfun{S_1}{q^1; \alpha_1}$
+
+    \item $S_j$ with $j = 2, \ldots, m$ comes iteratively; this gives
+    \begin{align}
+    \begin{split}
+    &\quad\,\rfun{S}{q^i; \alpha_1, \ldots \alpha_m} = \rfun{S_1}{q^1; \alpha_1} + %\rfun{S_2}{q^2; \alpha_1, \alpha_2} +
+    \ldots
+    \\
+    &+ \rfun{S_m}{q^m; \alpha_1, \ldots, \alpha_m}
+    +
+    \rfun{\widetilde{S}_{m}}{q^{m+1}\ldots q^n}\,. %; \alpha_1, \ldots, \alpha_m}\,.
+\end{split}
+\tag{eq.\ \eqref{eq:packet-250} rev.}
+\end{align}
+
+    \item
+    The van Vleck factor comes in the usual WKB procedure at the next-to-leading order \hfill $\square$
+
+\end{itemize}
+
+\end{frame}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{Narrow Gaussian wave-packet}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+
+\begin{frame}{(2.0/4) Gaussian wave-packet of WKBmfs}{Introduction to the $2$-dimensional case}
+\begin{itemize}
+    \item We start with the WKB mode function in $2$-dimensions
+\begin{align}
+    \rfun{\psi}{q^1, q^2; \alpha} \approx \sqrt{D} \rfun{\exp}{\tfrac{\mi}{\hslash} \rbr{\rfun{S}{q^1, q^2; \alpha} - \alpha \beta}}\,,
+\end{align}
+where the additional phase $\alpha\beta$ fixes the new conserved conjugate coordinate $\beta$.
+
+\item
+A Gaussian wave-packet of such mode functions is the result of
+\begin{subequations}
+\begin{align}
+    \rfun{\varPsi}{q^1, q^2; \alpha, \sigma} &=
+    \int \dif \Alpha\,
+    \rfun{\psi}{q^1, q^2; \Alpha}
+    \rfun{\mathrm{GD}_2}{\alpha, \sigma; \Alpha}^{1/2}\,,
+    \label{eq:packet-gaussian-50a} \\
+    \rfun{\mathrm{GD}_2}{\alpha, \sigma; \Alpha} &\coloneqq
+    \frac{1}{\sqrt{2\uppi \sigma^2}} \rfun{\exp}{-\frac{1}{2} \sigma^{-2} \rbr{\Alpha-\alpha}^2}\,.
+    \label{eq:packet-gaussian-50b}
+\end{align}
+\end{subequations}
+\item
+If the wave-packet were \alert{narrow}, i.e.\ $\sigma$ `small', physicists would expect that $\varPsi$ `peaks around' a classical trajectory
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(2.0/4) Gaussian wave-packet of WKBmfs}{Theorem}
+    \begin{alertblock}{Theorem of narrow Gaussian wave-packet}
+    When the variance of a Gaussian amplitude is small, the resulting Gaussian wave-packet peaks around the classical trajectory given by $\partial_{\alpha} S = \beta$ in the Hamilton--Jacobi approach.
+    \end{alertblock}
+    \begin{itemize}
+        \item The theorem also holds for wave functions in higher dimensions and multivariate Gaussian amplitudes; just use `covariance', $\partial_{\alpha_j} S = \beta_j$ at the corresponding places.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{(2.0/4) Gaussian wave-packet of WKBmfs}{Outline of the proof}
+\begin{enumerate}
+    \item 
+    Apply Taylor's theorem to the exponent of the integrand to second order in $\rbr{\Alpha-\alpha}$
+    \item
+    Use the stationary phase approximation to work out the Gaussian integral and find the narrowness condition
+    \item
+    Calculate $\vbr{\varPsi}^2$ and find the naive peak
+    \item
+    Generalise the procedure in $2$-dimensions to higher dimensions
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{\boldmath (2.1/4) Gaussian wave-packet in $2$-dimensions}{1.\ Taylor's theorem}
+    Applying Taylor's theorem to $\rfun{O}{\rbr{\Alpha-\alpha}^2}$ gives
+    %to the exponent of the integrand in eq.\ \eqref{eq:packet-gaussian-50a} with respect to $\Alpha$ at $\alpha$ gives
+\begin{subequations}
+\begin{align}
+    &\quad\, \rfun{\psi}{q^1, q^2; \Alpha} \rfun{\mathrm{GD}_2}{\alpha, \sigma; \Alpha}^{1/2}
+    \nonumber \\
+    & = \rfun{\exp}{\mi d^{(0)}_1 +
+        \mi \rbr{\Alpha - \alpha} d^{(1)}_1 - \frac{1}{2} \rbr{\Alpha - \alpha}^2 d^{(2)}_1}
+    \rfun{g}{\Alpha}\,,
+    \label{eq:packet-gaussian-75a}\\
+    \begin{split}
+    d^{(0)}_1 &\coloneqq \frac{1}{\hslash}\rbr{\rfun{S}{q^1, q^2; \alpha} - \alpha \beta}\,,
+    \qquad
+    \alert{d^{(1)}_1 \coloneqq \frac{1}{\hslash}\rbr{\partial_{\alpha} S - \beta}}\,,
+    \\
+    d^{(2)}_1 &\coloneqq \frac{1}{2} \sigma^{-2} - \frac{\mi}{\hslash}\partial_{\alpha}^{2} S\,;
+    \end{split}
+    \\
+    \rfun{g}{\Alpha} &\coloneqq \rfun{\exp}{\rfun{h}{\Alpha}\rbr{\Alpha - \alpha}^2}\sqrt{D}\,, 
+\end{align}
+\end{subequations}
+where $\rfun{h}{\Alpha}$ is a Peano remainder, $\rfun{h}{\alpha} = 0$.
+\end{frame}
+
+\begin{frame}{\boldmath (2.1/4) Gaussian wave-packet in $2$-dimensions}{2.\ Stationary phase approximation and the narrowness condition}
+\begin{itemize}
+    \item The integral can be worked out by using the stationary phase approximation
+    \begin{align}
+    \begin{split}
+    &\quad\,\rfun{\varPsi}{q^1, q^2; \alpha, \sigma}
+    \\
+    &\approx \rbr{2\uppi}^{1/4}\sqrt{\frac{D}{\sigma d^{(2)}_1}}
+    \rfun{\exp}{\mi d^{(0)}_1 - \frac{\rbr{d^{(1)}_1}^{2}}{2d^{(2)}_1}}\,.
+    \end{split}
+\end{align}
+\item
+The approximation is an asymptotic expansion with respect to $1/d_1^{(2)}$. If $\sigma^{-2} \gg \hslash^{-1} \partial_\alpha^2 S$, the expansion parameter will be small. This is the \alert{narrowness condition}. (?)
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\boldmath (2.1/4) Gaussian wave-packet in $2$-dimensions}{3.\ Naive peak of the Schr\"odinger density}
+\begin{itemize}
+    \item The Schr\"odinger density $\rho = \rfun{\rho}{q^1, q^2; \alpha, \sigma} = \vbr{\varPsi}^2$ reads
+        \begin{align}
+    \rho &= 
+    \rbr{2\uppi}^{1/2}\frac{D}{\sigma \vbr{d^{(2)}_1}}
+    \rfun{\exp}{-\frac{\rfun{\mathrm{Re}}{ d^{(2)}_1}}{\vbr{d^{(2)}_1}^2}\rbr{d^{(1)}_1}^{2}}\,.
+\end{align}
+Given that $D/\vbr{d^{(2)}_1}$ varies slowly with respect to $\rbr{q^1, q^2}$, the peak of $\rho$ is dominated near $d^{(1)}_1 = 0$, where $\rfun{\exp}{0} = 1$.
+\item
+This means $\partial_\alpha S = \beta$, which gives the classical trajectory in the Hamilton--Jacobi formalism \footfullcite[sec.\ 47]{landau1}.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{(2.2/4) Gaussian wave-packet in higher dimensions}{4.0.\ WKB mode functions}
+
+The WKB mode function $\psi$ can contain $m \le n-1$ constants, 
+\begin{align}
+    \begin{split}
+        &\quad\,\rfun{\psi}{q^1, \ldots, q^n; \alpha_1, \ldots, \alpha_m} 
+        \\
+        &\approx \sqrt{D} \exp\!\Bigg(\frac{\mi}{\hslash}
+        \Bigg(\rfun{S}{q^1,\ldots, q^n; \alpha_1,\ldots, \alpha_m} - \sum_{k=1}^{m}\alpha_k \beta_k\Bigg)\Bigg)
+    \end{split}
+\end{align}
+\end{frame}
+
+\begin{frame}{(2.2/4) Gaussian wave-packet in higher dimensions}{4.1.\ Multivariable Gaussian wave-packets}
+Choosing a non-degenerate $m$-dimensional Gaussian amplitude results in
+\begin{subequations}
+\begin{align}
+    \begin{split}
+    &\quad\,\rfun{\varPsi}{q^i; \alpha_j, \Sigma_{jk}}
+    \\
+    &=
+    \int \dif \Alpha_1\ldots \dif \Alpha_{m}\,
+    \rfun{\psi}{q^i; \Alpha_k}
+    \rfun{\mathrm{GD}_m}{\alpha_k, \varSigma_{kl}; \Alpha_k}^{1/2}\,,    
+    \end{split}
+\end{align}
+where
+\begin{align}
+    \begin{split}
+    &\rfun{\mathrm{GD}_m}{\alpha_k, \varSigma_{kl}; \Alpha_k} 
+    \coloneqq
+    \rbr{\rbr{2\uppi}^{m} \det \varSigma}^{-1/2}
+    \\
+    &\qquad \cdot \rfun{\exp}{-\frac{1}{2} \sum_{k,l=1}^{m} \varSigma^{-1}_{kl} \rbr{\Alpha-\alpha}_k \rbr{\Alpha-\alpha}_l}\,,
+    \end{split}
+    \label{eq:packet-gaussian-100}
+\end{align}
+\end{subequations}
+$\varSigma$ the non-degenerate covariance matrix
+\end{frame}
+
+\begin{frame}{(2.2/4) Gaussian wave-packet in higher dimensions}{4.2.\ Stationary phase approximation}
+\begin{subequations}
+Again, apply Taylor's theorem to the quadratic order on the exponent and calculate the integral
+\begin{align}
+    \begin{split}
+    &\rfun{\varPsi}{q^i; \alpha_k, \varSigma_{kl}}
+    \approx
+    \rbr{\tfrac{\rbr{2\uppi}^{m}}{\det \varSigma}}^{1/4} \rbr{\tfrac{D}{\det d^{(2)}_m}}^{1/2}
+    \\
+    &\qquad\cdot
+    \rfun{\exp}{\mi d^{(0)}_m - \frac{1}{2} \sum\rbr{d^{(2)}_m}^{-1}_{kl} \rbr{d^{(1)}_m}_{k} \rbr{d^{(1)}_m}_{l}}\,,
+    \end{split}
+\end{align}
+\begin{align}
+    \begin{split}
+    d^{(0)}_m &\coloneqq \frac{1}{\hslash}\rbr{\rfun{S}{q^i; \alpha^k} - \sum \alpha_k \beta_k}\,,
+    \\
+    \rbr{d^{(1)}_m}_{k} &\coloneqq \tfrac{1}{\hslash}\rbr{\partial_{\alpha_k} S - \beta_k}\,,
+    \\
+    \rbr{d^{(2)}_m}_{kl} &\coloneqq \rbr{\tfrac{1}{2} \varSigma^{-1} - \tfrac{\mi}{\hslash}\mathrm{Hess}_{\alpha}\, S}_{kl}\,;
+    \end{split}
+    \\
+    \rbr{\mathrm{Hess}_{\alpha}\, S}_{kl} &\coloneqq \partial_{\alpha_k}\,\partial_{\alpha_l}S\,.
+\end{align}
+\end{subequations}
+\end{frame}
+
+\begin{frame}{(2.2/4) Gaussian wave-packet in higher dimensions}%
+{4.3.\ Naive peak of the Schr\"odinger density}
+\begin{align}
+    \begin{split}
+    \rho = \rfun{\rho}{q^i, \alpha_k, \varSigma_{kl}} = \vbr{\varPsi}^2 
+    =
+    \rbr{\frac{\rbr{2\uppi}^{m}}{\det \varSigma}}^{1/2} \frac{D}{\det d^{(2)}_m}
+    \\
+    \cdot \rfun{\exp}{-\rfun{\mathrm{Re}}{\sum_{k,l} \rbr{d^{(2)}_m}^{-1}_{kl} \rbr{d^{(1)}_m}_{k} \rbr{d^{(1)}_m}_{l}}}\,. 
+    \end{split}
+\end{align}
+The peak is dominated near the minimal of the quadratic form on the exponent, $\rbr{d_m^{(1)}}_{k} = 0$, or $\partial_{a_k}S = \beta_k$
+\end{frame}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{Discussion and outlook}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+
+\begin{frame}{(3.1/4) Discussion}
+    \begin{itemize}
+        \item
+        The wave-packets do not need to be put in by hand; they can be 
+        dynamically formed by e.g.\ decoherence
+        \item
+        The stationary equation also holds for quantum mechanical systems, so 
+        that our formalism has a formal chance to be experimentally tested
+        \item
+        The WKB approximation becomes inapplicable near classical 
+        turning points
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{(3.2/4) Outlook}
+    \begin{itemize}
+        \item
+        When applying the WKB method to quantum cosmology, the `corresponding' 
+        classical trajectory of a WKB wave function is given by the principle 
+        of constructive interference
+        \begin{itemize}
+            \item 
+            The `corresponding' trajectory of a generic wave-packet will be
+            (re-)given in our next talk
+        \end{itemize}
+        \item
+        Proposals for singularity avoidance requires the departure of the
+        wave-packet-peak from the classical 
+        trajectory\footfullcite{Kiefer2019a}, which is absent in this 
+        formalism
+        \begin{itemize}
+            \item 
+            The departure will be studied and given in yet another talk 
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+\appendix
+
+\begin{frame}[allowframebreaks]{References}
+
+\printbibliography
+
+\end{frame}
+
+
+% \begin{frame}
+%   \frametitle{\texttt{block}-Umgebungen}
+%   \begin{block}{Standard (\texttt{block})}
+%     Verwendet die Farbe "`Blaugrau Mittel"' als Blocktitel-Hintergrund
+%   \end{block}
+
+%   \begin{exampleblock}{\texttt{exampleblock}}
+%     Bei Verwendung der Fußzeile mit allen Fakultätsfarben
+%     Titelhintergrund in Wiso-Grün, sonst in der jeweiligen
+%     Fakultätsfarbe
+%   \end{exampleblock}
+
+%   \begin{alertblock}{\texttt{alertblock}}
+%     Verwendet das Rot der Folientitel
+%   \end{alertblock}
+
+% \end{frame}
+
+
+\end{document}
